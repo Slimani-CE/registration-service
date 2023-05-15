@@ -16,13 +16,13 @@ public class RestVehicleController {
     }
 
     // Simple CRUD operations
-    // - Create
+    // - Read all
     @GetMapping("/vehicles")
     public List<Vehicle> getVehicles(){
         return vehicleRepository.findAll();
     }
 
-    // - Read
+    // - Read by id
     @GetMapping("/vehicles/{id}")
     public Vehicle getVehicleById(@PathVariable("id") Long id){
         return vehicleRepository.findById(id).get();

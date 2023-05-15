@@ -1,12 +1,10 @@
 package ma.slimanimustapha.registrationservice.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,4 +16,6 @@ public class Owner {
     private String name;
     private Date birthDate;
     private String email;
+    @OneToMany(mappedBy = "owner")
+    private List<Vehicle> vehicles;
 }

@@ -17,13 +17,13 @@ public class RestOwnerController {
     }
 
     // Simple CRUD operations
-    // - Create
+    // - Read all
     @GetMapping("/owners")
     public List<Owner> getOwners(){
         return ownerRepository.findAll();
     }
 
-    // - Read
+    // - Read by id
     @GetMapping("/owners/{id}")
     public Owner getOwnerById(@PathVariable("id") Long id){
         return ownerRepository.findById(id).get();
