@@ -1,2 +1,5 @@
 # Registration Service
-## Under development 🚀
+## Under development... 🚀
+
+### Class Diagram
+![Class diagram](assets/Class%20diagram.png)
