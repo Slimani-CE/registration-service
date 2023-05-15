@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor @ToString
 public class Owner {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Double id;
+    private Long id;
     private String name;
     private Date birthDate;
     private String email;
