@@ -16,10 +16,10 @@ type Mutation {
 
     # Vehicles methods
     saveVehicle(vehicleRequest: VehicleRequest): Vehicle
+    addVehicleToOwner(ownerId: ID, vehicleId: ID): Vehicle
     updateVehicle(id: ID, vehicleRequest: VehicleRequest): Vehicle
     deleteVehicle(id: ID): Boolean
 }
-
 
 input OwnerRequest{
     name: String
@@ -40,7 +40,6 @@ input VehicleRequest{
     brand: String
     fiscalPower: Float
     model: String
-    owner: OwnerRequest
 }
 
 type Vehicle{

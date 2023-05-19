@@ -1,15 +1,13 @@
-package ma.slimanimustapha.registrationservice.web;
+package ma.slimanimustapha.registrationservice.web.graphql;
 
 import ma.slimanimustapha.registrationservice.entities.Owner;
-import ma.slimanimustapha.registrationservice.entities.OwnerRequest;
+import ma.slimanimustapha.registrationservice.dto.OwnerRequest;
 import ma.slimanimustapha.registrationservice.repositories.OwnerRepository;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 
-import java.util.Date;
 import java.util.List;
 
 @Controller

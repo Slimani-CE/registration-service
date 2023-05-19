@@ -1,4 +1,4 @@
-package ma.slimanimustapha.registrationservice.entities;
+package ma.slimanimustapha.registrationservice.dto;
 
 import jakarta.persistence.Entity;
 import lombok.*;

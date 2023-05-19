@@ -1,8 +1,9 @@
 package ma.slimanimustapha.registrationservice;
 
-import ma.slimanimustapha.registrationservice.entities.Owner;
-import ma.slimanimustapha.registrationservice.web.RestOwnerController;
-import ma.slimanimustapha.registrationservice.web.RestVehicleController;
+import ma.slimanimustapha.registrationservice.dto.OwnerRequest;
+import ma.slimanimustapha.registrationservice.dto.VehicleRequest;
+import ma.slimanimustapha.registrationservice.web.rest.RestOwnerController;
+import ma.slimanimustapha.registrationservice.web.rest.RestVehicleController;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,28 +32,28 @@ public class RegistrationServiceApplication implements CommandLineRunner {
 
         // Create owners
         Stream.of("Mustapha", "Ahmed", "oussama", "hind", "sanae").forEach(name -> {
-            Owner owner = Owner.builder()
-                    .id(null)
+            OwnerRequest ownerRequest = OwnerRequest.builder()
                     .name(name)
                     .birthDate(new Date().toString())
                     .email(name + "@gmail.com")
                     .build();
-            restOwnerController.saveOwner(owner);
+            restOwnerController.saveOwner(ownerRequest);
         });
 
         // Create vehicles and link them with owners
         restOwnerController.getOwners().forEach(owner -> {
-            Stream.of("Clio", "Golf", "Audi", "Mercedes", "BMW").forEach(brand -> {
-                restVehicleController.saveVehicle(
-                        ma.slimanimustapha.registrationservice.entities.Vehicle.builder()
-                                .id(null)
-                                .regNumber("ABC-" + Math.random() * 10000)
-                                .brand(brand)
-                                .fiscalPower((float)(Math.random() * 10))
-                                .model("model " + Math.random() * 100)
-                                .owner(owner)
-                                .build()
-                );
+            Stream.of("Clio", "Mercedes", "BMW").forEach(brand -> {
+                VehicleRequest vehicleRequest = VehicleRequest.builder()
+                        .regNumber("ABC-" + Math.random() * 10000)
+                        .brand(brand)
+                        .fiscalPower((float)(Math.random() * 10))
+                        .model("model " + Math.random() * 100)
+                        .build();
+
+                Long vehicleId = restVehicleController.saveVehicle(vehicleRequest).getId();
+                Long ownerId = owner.getId();
+
+                restVehicleController.addVehicleToOwner(vehicleId, ownerId);
             });
         });
     }

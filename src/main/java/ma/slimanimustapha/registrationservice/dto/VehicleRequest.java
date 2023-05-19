@@ -1,4 +1,4 @@
-package ma.slimanimustapha.registrationservice.entities;
+package ma.slimanimustapha.registrationservice.dto;
 
 import lombok.*;
 
@@ -9,5 +9,4 @@ public class VehicleRequest {
     private String brand;
     private Float fiscalPower;
     private String model;
-    private OwnerRequest owner;
 }
