@@ -1,5 +1,6 @@
 package ma.slimanimustapha.registrationservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,5 +18,6 @@ public class Owner {
     private String birthDate;
     private String email;
     @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Vehicle> vehicles;
 }

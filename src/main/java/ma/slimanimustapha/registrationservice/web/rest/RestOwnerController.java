@@ -69,4 +69,11 @@ public class RestOwnerController {
             return false;
         }
     }
+
+    // Custom operations
+    // - Check if owner exists
+    @GetMapping("/owners/exist/{id}")
+    public boolean ownerExists(@PathVariable("id") Long id){
+        return ownerRepository.existsById(id);
+    }
 }

@@ -73,6 +73,8 @@ public class RestVehicleController {
         else return false;
     }
 
+    // Custom operations
+    // - Add vehicle to owner
     @PostMapping("/vehicles/{vehicleId}/owners/{ownerId}")
     public Vehicle addVehicleToOwner(@PathVariable Long vehicleId,@PathVariable Long ownerId) {
         if(vehicleRepository.existsById(vehicleId) && ownerRepository.existsById(ownerId)){
@@ -82,4 +84,11 @@ public class RestVehicleController {
         }
         else return null;
     }
+
+    // - Check if vehicle exists
+    @GetMapping("/vehicles/exist/{id}")
+    public boolean vehicleExists(@PathVariable("id") Long id){
+        return vehicleRepository.existsById(id);
+    }
+
 }
