@@ -30,19 +30,19 @@ public class RestVehicleController {
 
     // - Update
     @PostMapping("/vehicles")
-    public Vehicle saveVehicle(@RequestBody Vehicle vehicle){
-        return vehicleRepository.save(vehicle);
+    public Vehicle saveVehicle(@RequestBody Vehicle vehicleRequest){
+        return vehicleRepository.save(vehicleRequest);
     }
 
     // - Update
-    @DeleteMapping("/vehicles/{id}")
-    public Vehicle updateVehicle(@PathVariable("id") Long id,@RequestBody Vehicle vehicle){
-        vehicle.setId(id);
-        return vehicleRepository.save(vehicle);
+    @PutMapping("/vehicles/{id}")
+    public Vehicle updateVehicle(@PathVariable("id") Long id,@RequestBody Vehicle vehicleRequest){
+        vehicleRequest.setId(id);
+        return vehicleRepository.save(vehicleRequest);
     }
 
     // - Delete
-    @PutMapping("/vehicles/{id}")
+    @DeleteMapping("/vehicles/{id}")
     public void deleteVehicle(@PathVariable("id") Long id){
         vehicleRepository.deleteById(id);
     }

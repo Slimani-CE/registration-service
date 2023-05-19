@@ -10,20 +10,21 @@ type Query {
 
 type Mutation {
     # Owners methods
-    saveOwner(input: OwnerInput): Owner
-    updateOwner(id: ID, input: OwnerInput): Owner
-    deleteOwner(id: ID): String
+    saveOwner(ownerRequest: OwnerRequest): Owner
+    updateOwner(id: ID, ownerRequest: OwnerRequest): Owner
+    deleteOwner(id: ID): Boolean
 
     # Vehicles methods
-    saveVehicle(input: VehicleInput): Vehicle
-    updateVehicle(id: ID, input: VehicleInput): Vehicle
-    deleteVehicle(id: ID): String
+    saveVehicle(vehicleRequest: VehicleRequest): Vehicle
+    updateVehicle(id: ID, vehicleRequest: VehicleRequest): Vehicle
+    deleteVehicle(id: ID): Boolean
 }
 
 
-input OwnerInput{
+input OwnerRequest{
     name: String
     email: String
+    birthDate: String
 }
 
 type Owner{
@@ -31,21 +32,22 @@ type Owner{
     name: String
     birthDate: String
     email: String
+    vehicles: [Vehicle]
 }
 
-input VehicleInput{
+input VehicleRequest{
     regNumber: String
     brand: String
-    fiscalPower: Int
+    fiscalPower: Float
     model: String
-    owner: OwnerInput
+    owner: OwnerRequest
 }
 
 type Vehicle{
     id: ID
     regNumber: String
     brand: String
-    fiscalPower: Int
+    fiscalPower: Float
     model: String
     owner: Owner
 }

@@ -3,12 +3,11 @@ package ma.slimanimustapha.registrationservice.web;
 import ma.slimanimustapha.registrationservice.entities.Owner;
 import ma.slimanimustapha.registrationservice.entities.OwnerRequest;
 import ma.slimanimustapha.registrationservice.repositories.OwnerRepository;
-import ma.slimanimustapha.registrationservice.repositories.VehicleRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.util.Date;
 import java.util.List;
@@ -35,29 +34,35 @@ public class GraphQLOwnerController {
     }
 
     // - Save
-    @MutationMapping
+    @MutationMapping("saveOwner")
     public Owner saveOwner(@Argument OwnerRequest ownerRequest){
         Owner owner = new Owner();
 
         if(ownerRequest.getName() != null) owner.setName(ownerRequest.getName());
         if(ownerRequest.getEmail() != null) owner.setEmail(ownerRequest.getEmail());
+        if(ownerRequest.getBirthDate() != null) owner.setBirthDate(ownerRequest.getBirthDate());
+
         owner.setId(null);
         owner.setVehicles(null);
-        owner.setBirthDate(new Date());
-
         return ownerRepository.save(owner);
     }
 
     // - Update
-    @QueryMapping
-    public Owner updateOwner(@Argument Long id,@Argument Owner owner){
-        owner.setId(id);
+    @MutationMapping("updateOwner")
+    public Owner updateOwner(@Argument Long id, @Argument Owner ownerRequest){
+        Owner owner = ownerRepository.findById(id).get();
+
+        if(ownerRequest.getName() != null) owner.setName(ownerRequest.getName());
+        if(ownerRequest.getEmail() != null) owner.setEmail(ownerRequest.getEmail());
+        if(ownerRequest.getBirthDate() != null) owner.setBirthDate(ownerRequest.getBirthDate());
+
         return ownerRepository.save(owner);
     }
 
     // - Delete
-    @QueryMapping
-    public void deleteOwner(@Argument Long id){
+    @MutationMapping("deleteOwner")
+    public boolean deleteOwner(@Argument Long id){
         ownerRepository.deleteById(id);
+        return true;
     }
 }

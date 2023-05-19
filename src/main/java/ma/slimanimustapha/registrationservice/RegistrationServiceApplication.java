@@ -28,12 +28,13 @@ public class RegistrationServiceApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
         // Create owners
         Stream.of("Mustapha", "Ahmed", "oussama", "hind", "sanae").forEach(name -> {
             Owner owner = Owner.builder()
                     .id(null)
                     .name(name)
-                    .birthDate(new Date())
+                    .birthDate(new Date().toString())
                     .email(name + "@gmail.com")
                     .build();
             restOwnerController.saveOwner(owner);
@@ -47,7 +48,7 @@ public class RegistrationServiceApplication implements CommandLineRunner {
                                 .id(null)
                                 .regNumber("ABC-" + Math.random() * 10000)
                                 .brand(brand)
-                                .fiscalPower(Math.random() * 10)
+                                .fiscalPower((float)(Math.random() * 10))
                                 .model("model " + Math.random() * 100)
                                 .owner(owner)
                                 .build()

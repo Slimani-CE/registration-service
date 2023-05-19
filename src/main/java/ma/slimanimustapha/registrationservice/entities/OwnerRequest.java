@@ -13,4 +13,5 @@ import java.util.Date;
 public class OwnerRequest {
     private String name;
     private String email;
+    private String birthDate;
 }

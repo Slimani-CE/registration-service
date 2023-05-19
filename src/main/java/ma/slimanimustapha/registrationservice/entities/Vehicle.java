@@ -14,7 +14,7 @@ public class Vehicle {
     private Long id;
     private String regNumber;
     private String brand;
-    private Double fiscalPower;
+    private Float fiscalPower;
     private String model;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
