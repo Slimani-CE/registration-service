@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Date;
+import java.util.Random;
 import java.util.stream.Stream;
 
 @SpringBootApplication
@@ -44,10 +45,10 @@ public class RegistrationServiceApplication implements CommandLineRunner {
         restOwnerController.getOwners().forEach(owner -> {
             Stream.of("Clio", "Mercedes", "BMW").forEach(brand -> {
                 VehicleRequest vehicleRequest = VehicleRequest.builder()
-                        .regNumber("ABC-" + Math.random() * 10000)
+                        .regNumber("ABC-" + new Random().nextInt(1000000))
                         .brand(brand)
-                        .fiscalPower((float)(Math.random() * 10))
-                        .model("model " + Math.random() * 100)
+                        .fiscalPower((float)(new Random().nextInt(20)))
+                        .model("model " + new Random().nextInt(100))
                         .build();
 
                 Long vehicleId = restVehicleController.saveVehicle(vehicleRequest).getId();
